@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyGP", "TinyGP\TinyGP.csproj", "{FFD57057-6457-403D-8146-877FA6C77858}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FFD57057-6457-403D-8146-877FA6C77858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFD57057-6457-403D-8146-877FA6C77858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFD57057-6457-403D-8146-877FA6C77858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFD57057-6457-403D-8146-877FA6C77858}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
