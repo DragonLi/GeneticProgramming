@@ -4,3 +4,9 @@
 TinyGP/bin/
 
 TinyGP/obj/
+
+\.DS_Store
+
+DotNet/TinyGP/bin/
+
+DotNet/TinyGP/obj/
