@@ -7,7 +7,7 @@ namespace TinyGP
     {
         public static int Main(string[] args)
         {
-            string fname = "problem.dat";
+            var fname = "problem.dat";
             long s = -1;
     
             if ( args.Length == 2 ) {
@@ -18,14 +18,14 @@ namespace TinyGP
                 fname = args[0];
             }
     
-            tiny_gp gp = new tiny_gp(fname, s);
+            var gp = new tiny_gp(fname, s);
             return gp.evolve();
         }
     }
 
     internal class tiny_gp
     {
-        const int ADD = 110, 
+        const byte ADD = 110, 
         SUB = 111, 
         MUL = 112, 
         DIV = 113,
@@ -43,7 +43,7 @@ namespace TinyGP
         
         static double [] x = new double[FSET_START];
         static double minrandom, maxrandom;
-        static char [] program;
+        static byte [] program;
         static int PC;
         static int varnumber, fitnesscases, randomnumber;
         static double fbestpop = 0.0, favgpop = 0.0;
@@ -53,7 +53,7 @@ namespace TinyGP
         static double [][] targets;
 
         private double[] fitness;
-        char [][] pop;
+        byte [][] pop;
 
         public tiny_gp(string fname, long s)
         {
@@ -62,7 +62,7 @@ namespace TinyGP
             if ( seed >= 0 )
                 rd = new Random((int) seed);
             setup_fitness(fname);//read parameters and input/output examples from input file
-            for ( int i = 0; i < FSET_START; i ++ )
+            for ( var i = 0; i < FSET_START; i ++ )
                 x[i]= (maxrandom-minrandom)*rd.NextDouble()+minrandom;
             pop = create_random_pop(POPSIZE, DEPTH, fitness );
         }
@@ -99,9 +99,9 @@ namespace TinyGP
             }
         }
 
-        private char[][] create_random_pop(int popsize, int depth, double[] pFitness)
+        private byte[][] create_random_pop(int popsize, int depth, double[] pFitness)
         {
-            char [][]pop = new char[popsize][];
+            var pop = new byte[popsize][];
             int i;
     
             for ( i = 0; i < popsize; i ++ ) {
@@ -111,10 +111,10 @@ namespace TinyGP
             return pop;
         }
 
-        static char [] buffer = new char[MAX_LEN];
-        private char[] create_random_indiv(int depth)
+        static byte [] buffer = new byte[MAX_LEN];
+        private byte[] create_random_indiv(int depth)
         {
-            char [] ind;
+            byte [] ind;
             int len;
 
             len = grow (buffer, 0, MAX_LEN, depth );
@@ -122,33 +122,32 @@ namespace TinyGP
             while (len < 0 )
                 len = grow( buffer, 0, MAX_LEN, depth );
 
-            ind = new char[len];
+            ind = new byte[len];
 
             Buffer.BlockCopy(buffer, 0, ind, 0, len ); 
             return( ind );
         }
 
         //return next position to grow, or -1 to signal the end of grow
-        private int grow(char[] pBuffer, int position, int maxLen, int depth)
+        private int grow(byte[] pBuffer, int position, int maxLen, int depth)
         {
-            char prim = (char) rd.Next(2);
+            var prim = (byte)rd.Next(2);
             int one_child;
 
             if ( position >= maxLen ) 
                 return( -1 );
     
             if ( position == 0 )
-                prim = (char) 1;
+                prim =  1;
     
             if ( prim == 0 || depth == 0 ) {
-                prim = (char) rd.Next(varnumber + randomnumber);//refer to one of input parameters or random constants
+                prim = (byte) rd.Next(varnumber + randomnumber);//refer to one of input parameters or random constants
                 pBuffer[position] = prim;
                 return(position+1);
             }
 
-            var rp = (rd.Next(FSET_END - FSET_START + 1) + FSET_START);
-            prim = (char) rp;
-            switch(rp) {
+            prim = (byte) (rd.Next(FSET_END - FSET_START + 1) + FSET_START);
+            switch(prim) {
                 case ADD: 
                 case SUB: 
                 case MUL: 
@@ -159,18 +158,19 @@ namespace TinyGP
                         return( -1 );//reach max length
                     return( grow( pBuffer, one_child, maxLen,depth-1 ) );//second operand
             }
-            return( 0 ); // should never get here
+            throw new Exception();
+            //return( 0 ); // should never get here
         }
 
         //prog is linear formated program source code in prefix tree order
-        private double fitness_function(char[] Prog)
+        private double fitness_function(byte[] Prog)
         {
             int i = 0, len;
             double result, fit = 0.0;
     
             len = traverse( Prog, 0 ); //traverse to check syntax?
             for (i = 0; i < fitnesscases; i ++ ) {
-                for (int j = 0; j < varnumber; j ++ )//fill in one input datas
+                for (var j = 0; j < varnumber; j ++ )//fill in one input datas
                     x[j] = targets[i][j];
                 program = Prog;
                 PC = 0;
@@ -181,29 +181,29 @@ namespace TinyGP
         }
 
         //return next position to traverse
-        private int traverse(char [] programTree, int position)
+        private int traverse(byte [] programTree, int position)
         {
             if ( programTree[position] < FSET_START )
                 return( ++position );
 
-            var c = (int)programTree[position];
-            switch(c) {
+            switch(programTree[position]) {
                 case ADD: 
                 case SUB: 
                 case MUL: 
                 case DIV: 
-                    return( traverse( programTree, traverse( programTree, ++position ) ) );
+                    return( traverse( programTree, 
+                                     traverse( programTree, ++position ) ) );
             }
-            return( 0 ); // should never get here
+            throw new Exception();
+            //return( -1 ); // should never get here
         }
 
         private double run()
         {
-            char primitive = program[PC++];
+            var primitive = program[PC++];
             if ( primitive < FSET_START )
                 return(x[primitive]);
-            var operatorCode = (int) primitive;
-            switch ( operatorCode ) {
+            switch ( primitive ) {
                 case ADD : return( run() + run() );
                 case SUB : return( run() - run() );
                 case MUL : return( run() * run() );
@@ -215,14 +215,15 @@ namespace TinyGP
                         return( num / den );
                 }
             }
-            return( 0.0 ); // should never get here
+            throw new Exception();
+            //return( 0.0 ); // should never get here
         }
 
         public int evolve()
         {
             int gen = 0, indivs, offspring, parent1, parent2, parent;
             double newfit;
-            char []newind;
+            byte []newind;
             print_parms();
             stats( fitness, pop, 0 );
             for ( gen = 1; gen < GENERATIONS; gen ++ ) {
@@ -254,7 +255,7 @@ namespace TinyGP
         
         int tournament( double [] fitness, int tsize ) {
             int best = rd.Next(POPSIZE), i, competitor;
-            double  fbest = -1.0e34;
+            var  fbest = -1.0e34;
     
             for ( i = 0; i < tsize; i ++ ) {
                 competitor = rd.Next(POPSIZE);
@@ -268,7 +269,7 @@ namespace TinyGP
         
         int negative_tournament( double [] fitness, int tsize ) {
             int worst = rd.Next(POPSIZE), i, competitor;
-            double fworst = 1e34;
+            var fworst = 1e34;
     
             for ( i = 0; i < tsize; i ++ ) {
                 competitor = rd.Next(POPSIZE);
@@ -280,11 +281,11 @@ namespace TinyGP
             return( worst );
         }
   
-        char [] crossover( char []parent1, char [] parent2 ) {
+        byte [] crossover( byte []parent1, byte [] parent2 ) {
             int xo1start, xo1end, xo2start, xo2end;
-            char [] offspring;
-            int len1 = traverse( parent1, 0 );
-            int len2 = traverse( parent2, 0 );
+            byte [] offspring;
+            var len1 = traverse( parent1, 0 );
+            var len2 = traverse( parent2, 0 );
             int lenoff;
     
             xo1start =  rd.Next(len1);
@@ -295,7 +296,7 @@ namespace TinyGP
     
             lenoff = xo1start + (xo2end - xo2start) + (len1-xo1end);
 
-            offspring = new char[lenoff];
+            offspring = new byte[lenoff];
 
             Buffer.BlockCopy( parent1, 0, offspring, 0, xo1start );
             Buffer.BlockCopy( parent2, xo2start, offspring, xo1start,  
@@ -307,27 +308,26 @@ namespace TinyGP
             return( offspring );
         }
   
-        char [] mutation( char [] parent, double pmut ) {
+        byte [] mutation( byte [] parent, double pmut ) {
             int len = traverse( parent, 0 ), i;
             int mutsite;
-            char [] parentcopy = new char [len];
+            var parentcopy = new byte [len];
     
             Buffer.BlockCopy( parent, 0, parentcopy, 0, len );
             for (i = 0; i < len; i ++ ) {  
                 if ( rd.NextDouble() < pmut ) {
                     mutsite =  i;
                     if ( parentcopy[mutsite] < FSET_START )
-                        parentcopy[mutsite] = (char) rd.Next(varnumber+randomnumber);
+                        parentcopy[mutsite] = (byte) rd.Next(varnumber+randomnumber);
                     else
                     {
-                        var c = (int) parentcopy[mutsite];
-                        switch(c) {
+                        switch(parentcopy[mutsite]) {
                             case ADD: 
                             case SUB: 
                             case MUL: 
                             case DIV:
                                 parentcopy[mutsite] = 
-                                    (char) (rd.Next(FSET_END - FSET_START + 1) 
+                                    (byte) (rd.Next(FSET_END - FSET_START + 1) 
                                             + FSET_START);
                                 break;
                         }
@@ -337,10 +337,10 @@ namespace TinyGP
             return( parentcopy );
         }
 
-        private void stats( double [] pFitness, char [][] pPop, int gen )
+        private void stats( double [] pFitness, byte [][] pPop, int gen )
         {
             int i, best = rd.Next(POPSIZE);
-            int node_count = 0;
+            var node_count = 0;
             fbestpop = pFitness[best];
             favgpop = 0.0;
 
@@ -361,7 +361,7 @@ namespace TinyGP
             Console.Write( "\n");
         }
         
-        int print_indiv( char []buffer, int buffercounter ) {
+        int print_indiv( byte []buffer, int buffercounter ) {
             int a1=0, a2;
             if ( buffer[buffercounter] < FSET_START ) {
                 if ( buffer[buffercounter] < varnumber )
@@ -371,8 +371,7 @@ namespace TinyGP
                 return( ++buffercounter );
             }
 
-            var c = (int)buffer[buffercounter];
-            switch(c) {
+            switch(buffer[buffercounter]) {
                 case ADD: Console.Write( "(");
                     a1=print_indiv( buffer, ++buffercounter ); 
                     Console.Write( " + "); 
