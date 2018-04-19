@@ -61,6 +61,7 @@ namespace TinyGP
 
         private readonly char[] _separator = {' ', '\t', '\n', '\r', '\f'};
 
+        //key data to dump for resume:_pop,_fitness,_popNodeEndIndex
         private readonly double[] _fitness;
         private readonly byte[][] _pop;
         
