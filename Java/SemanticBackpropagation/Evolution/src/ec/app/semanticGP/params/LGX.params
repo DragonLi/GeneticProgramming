@@ -1,0 +1,13 @@
+#gp.breed.LGX.source.0			= ec.gp.semantic.select.SemanticTournamentSelection
+gp.breed.LGX.source.0			= ec.select.TournamentSelection
+gp.breed.LGX.source.1			= same
+gp.breed.LGX.ns.0 = ec.gp.koza.KozaNodeSelector
+gp.breed.LGX.ns.1 = same
+gp.breed.LGX.maxdepth = 17
+gp.breed.LGX.tries = 1
+
+gp.breed.LGX.random			= false
+gp.breed.LGX.macromutateThreshold= 0
+gp.breed.LGX.neighborCount		= 8
+
+SemanticTournamentSelection.size	= 7 

@@ -1,0 +1,9 @@
+parent.0 = semantic_boolean.params
+
+gp.fs.0.size				= 9
+library.instructions.size	= 9
+
+eval.problem				= ec.app.semanticGP.Parity
+eval.problem.bits			= 5
+
+

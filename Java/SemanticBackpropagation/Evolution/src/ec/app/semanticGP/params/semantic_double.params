@@ -1,0 +1,97 @@
+parent.0 = semantic.params
+
+# Stolen from koza/params -- overwriting just
+# a little for readability
+# You need to create at least one function set, 
+# called "f0", which your first tree will use.  
+
+gp.fs.size = 1
+gp.fs.0.name = f0
+gp.fs.0.size = 16
+
+gp.fs.0.func.0 = ec.app.semanticGP.func.numeric.X0
+gp.fs.0.func.0.nc = nc0
+
+gp.fs.0.func.1 = ec.app.semanticGP.func.numeric.Sum
+gp.fs.0.func.1.nc = nc2
+
+gp.fs.0.func.2 = ec.app.semanticGP.func.numeric.Sub
+gp.fs.0.func.2.nc = nc2
+
+gp.fs.0.func.3 = ec.app.semanticGP.func.numeric.Mul
+gp.fs.0.func.3.nc = nc2
+
+gp.fs.0.func.4 = ec.app.semanticGP.func.numeric.Div
+gp.fs.0.func.4.nc = nc2
+
+gp.fs.0.func.5 = ec.app.semanticGP.func.numeric.Sin
+gp.fs.0.func.5.nc = nc1
+
+gp.fs.0.func.6 = ec.app.semanticGP.func.numeric.Cos
+gp.fs.0.func.6.nc = nc1
+
+gp.fs.0.func.7 = ec.app.semanticGP.func.numeric.Exp
+gp.fs.0.func.7.nc = nc1
+
+gp.fs.0.func.8 = ec.app.semanticGP.func.numeric.Log
+gp.fs.0.func.8.nc = nc1
+
+gp.fs.0.func.9 = ec.app.semanticGP.func.numeric.X1
+gp.fs.0.func.9.nc = nc0
+
+gp.fs.0.func.10 = ec.app.semanticGP.func.numeric.X2
+gp.fs.0.func.10.nc = nc0
+
+gp.fs.0.func.11 = ec.app.semanticGP.func.numeric.X3
+gp.fs.0.func.11.nc = nc0
+
+gp.fs.0.func.12 = ec.app.semanticGP.func.numeric.X4
+gp.fs.0.func.12.nc = nc0
+
+gp.fs.0.func.13 = ec.app.semanticGP.func.numeric.X5
+gp.fs.0.func.13.nc = nc0
+
+gp.fs.0.func.14 = ec.app.semanticGP.func.numeric.X6
+gp.fs.0.func.14.nc = nc0
+
+gp.fs.0.func.15 = ec.app.semanticGP.func.numeric.X7
+gp.fs.0.func.15.nc = nc0
+
+libraryFactory = ec.gp.semantic.library.DoublePopulationLibraryFactory
+library.instructions.size	= 16
+library.instructions.0		= library.instructions.numeric.X0
+library.instructions.1		= library.instructions.numeric.Sum
+library.instructions.2		= library.instructions.numeric.Sub
+library.instructions.3		= library.instructions.numeric.Mul
+library.instructions.4		= library.instructions.numeric.Div
+library.instructions.5		= library.instructions.numeric.Sin
+library.instructions.6		= library.instructions.numeric.Cos
+library.instructions.7		= library.instructions.numeric.Exp
+library.instructions.8		= library.instructions.numeric.Log
+library.instructions.9		= library.instructions.numeric.X1
+library.instructions.10		= library.instructions.numeric.X2
+library.instructions.11		= library.instructions.numeric.X3
+library.instructions.12		= library.instructions.numeric.X4
+library.instructions.13		= library.instructions.numeric.X5
+library.instructions.14		= library.instructions.numeric.X6
+library.instructions.15		= library.instructions.numeric.X7
+
+
+library.maxChildDepth		= 3
+#library.semantics			= library.semantics.IntervalSemantics
+library.uniquenessFiltering = true
+
+#
+# We specify our problem here
+#
+
+eval.problem = ec.app.semanticGP.Regression
+eval.problem.data = ec.app.semanticGP.RegressionData
+
+testCases.factory		= ec.app.regression.testcases.Keijzer04Factory
+testCases.from			= 0
+testCases.to			= 10
+testCases.step			= 0.5263
+#0.1052
+
+

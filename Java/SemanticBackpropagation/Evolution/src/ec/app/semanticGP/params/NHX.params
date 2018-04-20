@@ -1,0 +1,13 @@
+# crossover parameters
+gp.breed.NHX.source.0			= ec.gp.semantic.select.SemanticTournamentSelection
+gp.breed.NHX.source.1			= same
+gp.breed.NHX.ns.0				= ec.gp.koza.KozaNodeSelector
+gp.breed.NHX.ns.1				= same
+gp.breed.NHX.maxdepth			= 17
+gp.breed.NHX.tries				= 1
+
+gp.breed.NHX.random			= false
+gp.breed.NHX.macromutateThreshold= 1
+gp.breed.NHX.neighborCount		= 8
+
+SemanticTournamentSelection.size	= 7 

@@ -1,0 +1,10 @@
+#gp.breed.RDO.source.0	= ec.gp.semantic.select.SemanticTournamentSelection
+gp.breed.RDO.source.0	= ec.select.TournamentSelection
+#gp.breed.RDO.source.0	= ec.select.RandomSelection
+gp.breed.RDO.ns.0		= ec.gp.koza.KozaNodeSelector
+gp.breed.RDO.build.0	= ec.gp.koza.GrowBuilder
+gp.breed.RDO.maxdepth	= 17
+gp.breed.RDO.tries		= 1
+gp.breed.RDO.inverter	= ec.gp.semantic.utils.DoubleSemanticInverter
+
+SemanticTournamentSelection.size	= 7 

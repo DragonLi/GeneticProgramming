@@ -1,0 +1,104 @@
+parent.0 = semantic.params
+
+# Stolen from koza/params -- overwriting just
+# a little for readability
+# You need to create at least one function set, 
+# called "f0", which your first tree will use.  
+
+gp.fs.size = 1
+gp.fs.0.name = f0
+gp.fs.0.size = 20
+
+gp.fs.0.func.0 = ec.app.semanticGP.func.logic.And
+gp.fs.0.func.0.nc = nc2
+
+gp.fs.0.func.1 = ec.app.semanticGP.func.logic.Or
+gp.fs.0.func.1.nc = nc2
+
+gp.fs.0.func.2 = ec.app.semanticGP.func.logic.Nand
+gp.fs.0.func.2.nc = nc2
+
+gp.fs.0.func.3 = ec.app.semanticGP.func.logic.Nor
+gp.fs.0.func.3.nc = nc2
+
+gp.fs.0.func.4 = ec.app.semanticGP.func.logic.Input0
+gp.fs.0.func.4.nc = nc0
+
+gp.fs.0.func.5 = ec.app.semanticGP.func.logic.Input1
+gp.fs.0.func.5.nc = nc0
+
+gp.fs.0.func.6 = ec.app.semanticGP.func.logic.Input2
+gp.fs.0.func.6.nc = nc0
+
+gp.fs.0.func.7 = ec.app.semanticGP.func.logic.Input3
+gp.fs.0.func.7.nc = nc0
+
+gp.fs.0.func.8 = ec.app.semanticGP.func.logic.Input4
+gp.fs.0.func.8.nc = nc0
+
+gp.fs.0.func.9 = ec.app.semanticGP.func.logic.Input5
+gp.fs.0.func.9.nc = nc0
+
+gp.fs.0.func.10 = ec.app.semanticGP.func.logic.Input6
+gp.fs.0.func.10.nc = nc0
+
+gp.fs.0.func.11 = ec.app.semanticGP.func.logic.Input7
+gp.fs.0.func.11.nc = nc0
+
+gp.fs.0.func.12 = ec.app.semanticGP.func.logic.Input8
+gp.fs.0.func.12.nc = nc0
+
+gp.fs.0.func.13 = ec.app.semanticGP.func.logic.Input9
+gp.fs.0.func.13.nc = nc0
+
+gp.fs.0.func.14 = ec.app.semanticGP.func.logic.Input10
+gp.fs.0.func.14.nc = nc0
+
+gp.fs.0.func.15 = ec.app.semanticGP.func.logic.Input11
+gp.fs.0.func.15.nc = nc0
+
+gp.fs.0.func.16 = ec.app.semanticGP.func.logic.Input12
+gp.fs.0.func.16.nc = nc0
+
+gp.fs.0.func.17 = ec.app.semanticGP.func.logic.Input13
+gp.fs.0.func.17.nc = nc0
+
+gp.fs.0.func.18 = ec.app.semanticGP.func.logic.Input14
+gp.fs.0.func.18.nc = nc0
+
+gp.fs.0.func.19 = ec.app.semanticGP.func.logic.Input15
+gp.fs.0.func.19.nc = nc0
+
+
+libraryFactory = ec.gp.semantic.library.BooleanStaticLibraryFactory
+library.instructions.size	= 20
+library.instructions.0		= library.instructions.logic.And
+library.instructions.1		= library.instructions.logic.Or
+library.instructions.2		= library.instructions.logic.Nand
+library.instructions.3		= library.instructions.logic.Nor
+library.instructions.4		= library.instructions.logic.Input0
+library.instructions.5		= library.instructions.logic.Input1
+library.instructions.6		= library.instructions.logic.Input2
+library.instructions.7		= library.instructions.logic.Input3
+library.instructions.8		= library.instructions.logic.Input4
+library.instructions.9		= library.instructions.logic.Input5
+library.instructions.10		= library.instructions.logic.Input6
+library.instructions.11		= library.instructions.logic.Input7
+library.instructions.12		= library.instructions.logic.Input8
+library.instructions.13		= library.instructions.logic.Input9
+library.instructions.14		= library.instructions.logic.Input10
+library.instructions.15		= library.instructions.logic.Input11
+library.instructions.16		= library.instructions.logic.Input12
+library.instructions.17		= library.instructions.logic.Input13
+library.instructions.18		= library.instructions.logic.Input14
+library.instructions.19		= library.instructions.logic.Input15
+
+library.maxChildDepth		= 3
+library.semantics			= library.semantics.BitwiseSemantics
+library.uniquenessFiltering = true
+
+eval.problem			= ec.app.semanticGP.Parity
+eval.problem.data		= ec.app.semanticGP.BooleanData
+
+gp.breed.AGX.inverter	= ec.gp.semantic.utils.BooleanSemanticInverter
+gp.breed.RDO.inverter	= ec.gp.semantic.utils.BooleanSemanticInverter

@@ -1,0 +1,79 @@
+# Copyright 2006 by Sean Luke and George Mason University
+# Licensed under the Academic Free License version 3.0
+# See the file "LICENSE" for more information
+
+parent.0 = ../../../gp/koza/koza.params
+
+seed.0 = 3433
+seed.1 = 3435
+seed.2 = 3436
+seed.3 = 3437
+seed.4 = 3438
+seed.5 = 3439
+seed.6 = 3440
+seed.7 = 3441
+seed.8 = 3442
+
+# DO NOT change evalthreads to higher values than 1; there is unidentified synchronization problem in evaluation phase
+evalthreads = 1
+breedthreads = 1
+jobs = 1
+
+generations = 51
+#timeLimit = 10000
+
+state = ec.gp.semantic.EvoState
+
+# initialize population from library
+#gp.tc.0.init = ec.gp.semantic.breed.IterativeNodeBuilder
+#gp.tc.0.init.prob	= 0.01
+
+pop.subpop.0.species.pipe = ec.breed.MultiBreedingPipeline
+# Koza's decision here was odd...
+pop.subpop.0.species.pipe.generate-max = false
+pop.subpop.0.duplicate-retries			= 10
+# Subsidiary pipelines:
+pop.subpop.0.species.pipe.num-sources	= 8
+pop.subpop.0.species.pipe.source.0		= ec.gp.semantic.breed.LGX
+pop.subpop.0.species.pipe.source.0.prob	= 0.0
+pop.subpop.0.species.pipe.source.1		= ec.gp.semantic.breed.NHX
+pop.subpop.0.species.pipe.source.1.prob	= 0.9
+pop.subpop.0.species.pipe.source.2		= ec.gp.koza.CrossoverPipeline
+pop.subpop.0.species.pipe.source.2.prob	= 0.0
+pop.subpop.0.species.pipe.source.3		= ec.breed.ReproductionPipeline
+pop.subpop.0.species.pipe.source.3.prob	= 0.1
+pop.subpop.0.species.pipe.source.4		= ec.gp.koza.MutationPipeline
+pop.subpop.0.species.pipe.source.4.prob	= 0.0
+pop.subpop.0.species.pipe.source.5		= ec.gp.semantic.breed.NonRandomizedLGX
+pop.subpop.0.species.pipe.source.5.prob	= 0.0
+pop.subpop.0.species.pipe.source.6		= ec.gp.semantic.breed.NonRandomizedNHX
+pop.subpop.0.species.pipe.source.6.prob	= 0.0
+pop.subpop.0.species.pipe.source.7		= ec.gp.semantic.breed.LM
+pop.subpop.0.species.pipe.source.7.prob	= 0.0
+
+
+# rehang parameters
+gp.breed.rehang.source.0	= ec.select.TournamentSelection
+gp.breed.rehang.tries		= 1
+
+# crossover parameters
+parent.1 = LGX.params
+parent.2 = NHX.params
+parent.3 = NonRandomizedLGX.params
+parent.4 = NonRandomizedNHX.params
+parent.5 = AGX.params
+
+# mutation parameters
+parent.6 = RDO.params
+
+stat		= ec.gp.semantic.statistics.Statistics
+stat.outDir	= results
+# do not create ECJ's statistics file
+stat.file	=
+
+quit-on-run-complete = true
+
+
+GenericStatistics.outDir		= results
+GenericStatistics.outFilename	= out
+

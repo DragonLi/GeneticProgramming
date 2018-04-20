@@ -1,0 +1,9 @@
+gp.breed.NonRandomizedLGX.source.0			= ec.select.TournamentSelection
+gp.breed.NonRandomizedLGX.source.1			= same
+gp.breed.NonRandomizedLGX.ns.0 = ec.gp.koza.KozaNodeSelector
+gp.breed.NonRandomizedLGX.ns.1 = same
+gp.breed.NonRandomizedLGX.maxdepth = 17
+gp.breed.NonRandomizedLGX.tries = 1
+
+gp.breed.NonRandomizedLGX.random				= false
+gp.breed.NonRandomizedLGX.macromutateThreshold= 1

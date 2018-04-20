@@ -1,0 +1,11 @@
+#gp.breed.AGX.source.0			= ec.gp.semantic.select.SemanticTournamentSelection
+gp.breed.AGX.source.0			= ec.select.TournamentSelection
+gp.breed.AGX.source.1			= same
+#gp.breed.AGX.ns.0				= ec.gp.koza.KozaNodeSelector
+gp.breed.AGX.ns.0				= ec.gp.semantic.nodeselectors.LinearProbabilityNodeSelector
+gp.breed.AGX.ns.1				= same
+gp.breed.AGX.maxdepth 			= 17
+gp.breed.AGX.tries 				= 1
+gp.breed.AGX.inverter			= ec.gp.semantic.utils.DoubleSemanticInverter
+
+SemanticTournamentSelection.size	= 7 

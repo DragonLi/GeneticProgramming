@@ -1,0 +1,9 @@
+parent.0 = semantic_boolean.params
+
+gp.fs.0.size				= 12
+library.instructions.size	= 12
+
+eval.problem				= ec.app.semanticGP.Comparator
+eval.problem.bits			= 4
+
+

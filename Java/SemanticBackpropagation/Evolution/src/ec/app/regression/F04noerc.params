@@ -1,0 +1,3 @@
+parent.0 = canonic.params
+eval.problem = ec.app.regression.F04
+

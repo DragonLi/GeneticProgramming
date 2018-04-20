@@ -1,0 +1,4 @@
+parent.0 = noerc.params
+eval.problem = ec.app.regression.F01
+
+gp.fs.0.size = 9
